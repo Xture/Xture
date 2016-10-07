@@ -2,3 +2,5 @@
 .idea/
 
 .vagga/
+
+node_modules/

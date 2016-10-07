@@ -10,7 +10,7 @@ _templates:
     /config: !BindRO /work/config
 
 containers:
- python:
+  python:
     setup:
     - !Ubuntu xenial
     - !Install [libpq-dev, make]
@@ -37,7 +37,7 @@ commands:
     - python3
     - run.py
 
-webpack: !Command
+  webpack: !Command
     description: Build static
     container: static
     environ:
