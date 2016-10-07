@@ -1,0 +1,18 @@
+//Media queries mixin definition
+media-queries = {
+  mobile-max : "screen and (min-width: 480px) and (max-width: 768px)"
+  tab-min : "screen and (min-width: 768px) and (max-width: 960px)",
+  tab-max : "screen and (min-width: 960px) and (max-width: 1200px)",
+  desktop : "screen and (min-width: 1200px)"
+}
+
+//Call this mixin like this:
+//+for-device(mobile1 mobile2 <other keys from media-queries>)
+//  <css here>
+for_device(devices)
+  conditions = ()
+  for device in devices
+    push(conditions, media-queries[device])
+  conditions = join(', ', conditions)
+  @media conditions
+    {block}
