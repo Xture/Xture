@@ -50,14 +50,26 @@ containers:
       file: package.json
 
 commands:
-  run: &run !Command
+  populate: !Command
+    description: init collection if not exists
+    container: mongodb
+    run: /work/populate.sh
+
+  run: !Supervise
     description: Run this application
-    tags: [app, python]
-    container: python
-    environ: *local_env
-    run:
-    - python3
-    - run.py
+    mode: stop-on-failure
+    children:
+      mongo: !Command
+        description: Run mongodb server
+        container: mongodb
+        run: mongod $(MONGO_ARGS)
+
+      python: !Command
+        container: python
+        environ: *local_env
+        run:
+        - python3
+        - run.py
 
   webpack: !Command
     description: Build static
