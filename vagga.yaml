@@ -1,3 +1,47 @@
+_templates:
+  local_env: &local_env
+    APP_CONFIG: /config/dev.py
+    PROJECT_CONFIG: /config/prom.py
+    CELERY_CONFIG_MODULE: celeryconfig.local
+    PYTHONPATH: /config
+  node_env: &node_env
+    NODE_PATH: /usr/local/lib/node_modules
+  local_volumes: &local_volumes
+    /config: !BindRO /work/config
 
 containers:
-    
+ python:
+    setup:
+    - !Ubuntu xenial
+    - !Install [libpq-dev, make]
+    - !PipConfig { dependencies: true }
+    - !Py3Requirements requirements.txt
+    - !EnsureDir /config
+    environ:
+      LANG: en_US.utf8
+    volumes: *local_volumes
+
+  static:
+    setup:
+    - !Ubuntu xenial
+    - !NpmDependencies
+      file: package.json
+
+commands:
+  run: &run !Command
+    description: Run this application
+    tags: [app, python]
+    container: python
+    environ: *local_env
+    run:
+    - python3
+    - run.py
+
+webpack: !Command
+    description: Build static
+    container: static
+    environ:
+      <<: *node_env
+      NODE_ENV: production
+    run: [webpack]
+
