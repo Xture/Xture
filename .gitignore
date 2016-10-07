@@ -13,3 +13,6 @@ __pycache__/
 
 # Ignore python compiled files
 *.pyc
+
+# Ignore generated statics
+static/

@@ -24,11 +24,11 @@
     "babel-preset-react": "^6.11.1",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "node-sass": "^3.9.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
-    "sass-loader": "^4.0.1",
     "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.3.1",
     "webpack": "^1.13.2",
     "xhr": "^2.2.2"
   },

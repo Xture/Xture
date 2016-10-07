@@ -67,3 +67,4 @@ commands:
       NODE_ENV: production
     run: [webpack]
 
+
