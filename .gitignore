@@ -7,3 +7,9 @@
 node_modules/
 
 config/local.py
+
+# Ignore python cache
+__pycache__/
+
+# Ignore python compiled files
+*.pyc
