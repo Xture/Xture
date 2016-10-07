@@ -11,14 +11,15 @@ def connection(mongo):
 
 def create_app():
     app = Flask(__name__)
-    app.config['MONGO_DBNAME'] = 'xture'
-    mongo = PyMongo(app)
-
-    app.before_request(connection(mongo))
 
     filepath = os.getenv('APP_CONFIG')
     abspath = os.path.abspath(filepath)
     app.config.from_pyfile(abspath)
+
+    # mongodb setup
+    mongo = PyMongo(app)
+    app.before_request(connection(mongo))
+
     setup_routes(app)
 
     return app
