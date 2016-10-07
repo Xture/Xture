@@ -1,8 +1,8 @@
 from flask import render_template, jsonify
 from flask import current_app as app
-from flask import request, response
+from flask import request
 from ..utils import objectid_fix
-from ..business_logic import get_adventure_by_id, create_adventure
+from ..business_logic.adventure_resource import get_adventure_by_id, create_adventure
 
 def index_view():
     return render_template('index.html')
@@ -21,8 +21,7 @@ def create_adventure_view():
     try:
         create_adventure(**input_data)
     except:
-        response.status_code = 400
-        return jsonify({})
+        return jsonify({}), 400
 
 
 def test_post_mongo():
