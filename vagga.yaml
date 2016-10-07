@@ -10,13 +10,35 @@ _templates:
     /config: !BindRO /work/config
 
 containers:
+  mongodb:
+    setup:
+      - !Ubuntu xenial
+      - !AptTrust keys: [EA312927]
+      - !UbuntuRepo
+        url: http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2
+        suite: multiverse
+        components: []
+      - !Install
+        - mongodb-org=3.2.6
+        - mongodb-org-server=3.2.6
+        - mongodb-org-shell=3.2.6
+        - mongodb-org-mongos=3.2.6
+        - mongodb-org-tools=3.2.6
+      - !EnsureDir /data/db
+    environ:
+      MONGO_ARGS: ""
+    volumes:
+      /data/db: !Tmpfs
+        size: 100M
+        mode: 0o700
+
   python:
     setup:
     - !Ubuntu xenial
-    - !Install [libpq-dev, make]
+    - !Install [make]
     - !PipConfig { dependencies: true }
     - !Py3Requirements requirements.txt
-    - !EnsureDir /config
+    - !EnsureDir /work/config
     environ:
       LANG: en_US.utf8
     volumes: *local_volumes
