@@ -38,7 +38,7 @@ containers:
     - !Install [make]
     - !PipConfig { dependencies: true }
     - !Py3Requirements requirements.txt
-    - !EnsureDir /work/config
+    - !EnsureDir /config
     environ:
       LANG: en_US.utf8
     volumes: *local_volumes
