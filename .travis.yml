@@ -1,0 +1,19 @@
+language: python
+
+dist: trusty
+sudo: required
+
+before_install:
+  - 'echo "$(id -un):100000:65536" | sudo tee /etc/subuid | sudo tee /etc/subgid'
+  - 'sudo apt-get install uidmap -y'
+  - "curl http://files.zerogw.com/vagga/vagga-install-testing.sh | sh"
+
+install:
+  - "echo ubuntu-mirror: http://mirrors.us.kernel.org/ubuntu/ > ~/.vagga.yaml"
+  - "echo alpine-mirror: http://mirrors.gigenet.com/alpinelinux/ >> ~/.vagga.yaml"
+
+before_script:
+  - vagga _build codestyle
+
+script:
+  - vagga codestyle
