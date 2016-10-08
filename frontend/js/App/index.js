@@ -1,15 +1,9 @@
 import React from 'react';
 import { Subject, BehaviorSubject } from 'rx';
 
-export const appBus = new Subject();
+import Login from '../views/Login/index';
 
-/**
- * Temporal implementation
- * TODO: move it into custom module
- */
-function Login(props) {
-    return <div>test</div>;
-}
+export const appBus = new Subject();
 
 export default class Application extends React.Component {
     constructor(props) {
@@ -22,12 +16,11 @@ export default class Application extends React.Component {
             currentView: 'Login',
         });
 
-        this.stateStream = appBus.filter(
+        appBus.filter(
             ({ action }) => action === 'ACTION_RENDER'
-        ).withLatestFrom(
-            this.stateStream,
-            (appData, streamData) => { currentView: appData.view }
-        ).merge(this.stateStream);
+        ).subscribe(({ view }) => {
+            this.stateStream.onNext({ currentView: view })
+        });
 
         this.render = this.render.bind(this);
         this.state = { currentView: 'Login' };
