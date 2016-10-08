@@ -1,3 +1,6 @@
+import json
+
+from app import logger
 from flask import request
 from app.utils import validate_input
 from app.utils import to_json
@@ -38,6 +41,8 @@ nearest_args = {
 def adventure_view():
     if request.method == 'POST':
         data = request.json
+        data['creator'] = str(request.user_id)
+        logger.debug('Creating new adv: {}'.format(json.dumps(data)))
         create_adventure(**data)
         return {"status": "OK"}
     if request.method == 'GET':

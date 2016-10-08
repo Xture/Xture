@@ -1,5 +1,6 @@
 import os
-
+import sys
+import logging
 import redis
 from flask import Flask
 from flask_script import Manager
@@ -20,6 +21,14 @@ app.json_encoder = JSONEncoder
 
 # mongodb setup
 mongo = PyMongo(app)
+
+# Configuring logging
+formatter = logging.Formatter("[%(name)s][%(levelname)s] %(filename)s:%(lineno)d - %(message)s")
+logger = logging.getLogger('user-interaction')
+handler = logging.StreamHandler(stream=sys.stderr)
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+logger.setLevel(logging.DEBUG)
 
 from app.routes import setup_routes
 from app.routes import RegexConverter
