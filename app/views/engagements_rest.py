@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request
 from app import logger
 from app.utils import to_json
 from app.utils import is_authenticated
