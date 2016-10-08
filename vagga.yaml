@@ -109,19 +109,9 @@ commands:
       NODE_ENV: production
     run: [webpack]
 
-  webpack-watch: !Command
-    description: Build static
-    container: static
-    environ:
-      <<: *node_env
-      NODE_ENV: production
-    run: webpack --watch
-
   codestyle: !Command
     description: Run codestyle check
     container: codestyle
     run:
     - flake8
     - --exclude=./.vagga
-
-
