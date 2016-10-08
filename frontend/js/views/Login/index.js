@@ -9,7 +9,7 @@ export default class Login extends React.Component {
         this.state = {
             login: '',
             password: '',
-        }
+        };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.handleInputLogin = this.handleInputLogin.bind(this);
@@ -26,25 +26,50 @@ export default class Login extends React.Component {
 
     onSubmit() {
         // TODO: add route, where to write
-        console.log(`${this.state.login} ${this.state.password}`);
+        let login = this.state.login;
+        let password = this.state.password;
+
+        fetch('/auth/login', {  method: 'POST', 
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({
+                                    login: login, 
+                                    password: password
+                                })
+                             })
+            .then((response) => {
+                localStorage.setItem('token', response.token);
+            });
     }
 
     render() {
         return (
-            <div style={{ marginTop: '200px' }}>
-                <input
-                    value={this.state.login}
-                    type="text"
-                    placeholder="Login"
-                    onChange={this.handleInputLogin}
-                />
-                <input
-                    value={this.state.password}
-                    type="password"
-                    placeholder="Password"
-                    onChange={this.handleInputPassword}
-                />
-                <button onClick={this.onSubmit}>Some strange text</button>
+            <div className="xr-form">
+                <div className="xr-form__group">
+                    <input type="text"
+                           value={this.state.login}
+                           required
+                           onChange={this.handleInputLogin}
+                           className="xr-form__input xr-form__input_focus xr-form__input_active" ></input>
+                    <span className="xr-form__bar"></span>
+                    <label className="xr-form__label">
+                        Login
+                    </label>
+                </div>
+
+                <div className="xr-form__group">
+                    <input type="password"
+                           required
+                           value={this.state.password}
+                           onChange={this.handleInputPassword}
+                           className="xr-form__input xr-form__input_focus xr-form__input_active"></input>
+                    <span className="xr-form__bar"></span>
+                    <label className="xr-form__label">
+                        Password
+                    </label>
+                </div>
+                <div className="xr-form__button">
+                    <div className="xr-form__button-text" onClick={this.onSubmit}>Log In</div>
+                </div>
             </div>
         );
     }
