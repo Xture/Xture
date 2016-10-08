@@ -2,12 +2,17 @@ import '../css/main.styl'
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import AllAdventuresList from 'react_components/AllAdventuresList'
+import AllAdventuresList from './react_components/AllAdventuresList'
+import CreateAdventureForm from './react_components/CreateAdventureForm'
+import Login from './react_components/Login'
+
 import Baz from 'bazooka';
 
 
 Baz.register({
-    'AllAdventuresList': AllAdventureList,
+    'AllAdventuresList': AllAdventuresList,
+    'CreateAdventureForm': CreateAdventureForm,
+    'Login': Login,
 });
 
 Baz.watch();

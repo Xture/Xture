@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
-import AllAdventuresList from './view';
-
+import CreateAdventureForm from './view';
 
 export default (node) => {
     ReactDOM.render(
-        <AllAdventuresList />,
+        <CreateAdventureForm />,
         node
     );
 }

@@ -3,6 +3,8 @@ from app.views.index import index_view
 
 from app.views.index import adventure_view as single_adventure_view
 from app.views.index import image_view
+from app.views.index import login_view as static_login_view
+
 from app.views.index import adventure_add_view
 from app.views.index import nearest_adventures
 from app.views.adventure_rest import adventure_view
@@ -12,6 +14,7 @@ from app.views.adventure_rest import add_image
 
 from app.views.auth_rest import signup_view
 from app.views.auth_rest import login_view
+from app.views.auth_rest import vk_auth_view
 
 from app.views.engagements_rest import like_view
 
@@ -29,13 +32,13 @@ def setup_routes(app):
         view_func=index_view
     )
     app.add_url_rule(
-        '/adventure/',
+        '/api/adventure/',
         'create_adventure_view',
         methods=['POST', 'GET'],
         view_func=adventure_view,
     )
     app.add_url_rule(
-        '/adventure/nearest/',
+        '/api/adventure/nearest/',
         'nearest_adventures_view',
         view_func=nearest_adventures_view,
     )
@@ -46,14 +49,21 @@ def setup_routes(app):
     )
 
     app.add_url_rule(
-        '/adventure/<regex("[0-9a-fA-F]{24}"):id_>',
-        'adventure_view',
-        view_func=single_adventure_view,
+        '/login',
+        'login_static_page',
+        view_func=static_login_view,
     )
+
     app.add_url_rule(
         '/adventure/new',
         'adventure_add_view',
         view_func=adventure_add_view,
+    )
+
+    app.add_url_rule(
+        '/api/adventure/<regex("[0-9a-fA-F]{24}"):id_>',
+        'adventure_view',
+        view_func=single_adventure_view,
     )
     app.add_url_rule(
         '/adventure/<regex("[0-9a-fA-F]{24}"):adventure_id>/add_image',
@@ -67,20 +77,26 @@ def setup_routes(app):
         view_func=image_view,
     )
     app.add_url_rule(
-        '/adventure/<regex("[0-9a-fA-F]{24}"):id_>/likes',
+        '/api/adventure/<regex("[0-9a-fA-F]{24}"):id_>/likes',
         'adv_likes',
         methods=['POST'],
         view_func=like_view,
     )
+    # auth handlers
     app.add_url_rule(
-        '/auth/signup',
+        '/api/auth/signup',
         'signup',
         view_func=signup_view,
         methods=['POST']
     )
     app.add_url_rule(
-        '/auth/login',
+        '/api/auth/login',
         'login',
         view_func=login_view,
         methods=['POST']
+    )
+    app.add_url_rule(
+        '/api/auth/vk',
+        'vk_signup',
+        view_func=vk_auth_view,
     )

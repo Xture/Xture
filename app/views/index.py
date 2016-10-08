@@ -13,6 +13,10 @@ def index_view():
     return render_template('index.html')
 
 
+def login_view():
+    return render_template('login.html')
+
+
 def adventure_view(id_):
     # TODO: get adventure by id
     adv = get_adventure_by_id(id_)

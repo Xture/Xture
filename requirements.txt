@@ -7,6 +7,7 @@ Jinja2==2.8
 jsonschema==2.5.1
 MarkupSafe==0.23
 pymongo==3.3.0
-python-magic==0.4.12
 redis==2.10.5
+requests==2.11.1
+python-magic
 Werkzeug==0.11.11
