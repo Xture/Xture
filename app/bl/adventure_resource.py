@@ -1,4 +1,5 @@
 from app import mongo
+from bson import ObjectId
 
 
 def create_adventure(*args, **kwargs):
@@ -6,7 +7,7 @@ def create_adventure(*args, **kwargs):
 
 
 def get_adventure_by_id(_id):
-    adv = mongo.db.adventure.find_one({'_id': _id})
+    adv = mongo.db.adventure.find_one({'_id': ObjectId(_id)})
     return adv
 
 
