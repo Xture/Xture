@@ -18,14 +18,18 @@ export default class extends React.Component {
                 (position) => {
                     const lng = position.coords.longitude;
                     const lat = position.coords.latitude;
-                    fetch(`/adventure/nearest?lat=${lat}&lng=${lng}`)
-                    .then((response) => response.json())
-                    .then((json) => {
-                        this.setState({
-                            adventures: json,
-                            fetched: true,
+
+                    var token = localStorage.token;
+                    var headers = {'Authorization': token};
+
+                    fetch(`/api/adventure/nearest?lat=${lat}&lng=${lng}`, {headers})
+                        .then((response) => response.json())
+                        .then((json) => {
+                            this.setState({
+                                adventures: json,
+                                fetched: true,
+                            });
                         });
-                    });
                 },
                 (err) => { /* TODO: handle that */
                     // function showError(error) {
