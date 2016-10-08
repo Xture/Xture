@@ -10,8 +10,10 @@ def create_like(adv_id, uid):
     if not adventure:
         logger.debug("no adventure with id " + str(adv_id))
     if 'likes' in adventure:
-        result = mongo.db.adventure.update({'_id': ObjectId(adv_id)},
-                                           {'$pull': {'likes': {'liker': uid}}})
+        result = mongo.db.adventure.update(
+            {'_id': ObjectId(adv_id)},
+            {'$pull': {'likes': {'liker': uid}}}
+        )
         logger.debug(result)
         if result['nModified'] == 0:
             logger.debug("push new like " + str(adv_id))

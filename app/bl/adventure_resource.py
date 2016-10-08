@@ -3,6 +3,7 @@ from bson import ObjectId
 
 
 def create_adventure(*args, **kwargs):
+    kwargs['images'] = kwargs.get('images', [])
     mongo.db.adventure.insert(kwargs)
 
 

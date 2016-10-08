@@ -23,7 +23,9 @@ app.json_encoder = JSONEncoder
 mongo = PyMongo(app)
 
 # Configuring logging
-formatter = logging.Formatter("[%(name)s][%(levelname)s] %(filename)s:%(lineno)d - %(message)s")
+formatter = logging.Formatter(
+    "[%(name)s][%(levelname)s] %(filename)s:%(lineno)d - %(message)s"
+)
 logger = logging.getLogger('user-interaction')
 handler = logging.StreamHandler(stream=sys.stderr)
 handler.setFormatter(formatter)

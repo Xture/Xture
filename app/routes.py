@@ -1,18 +1,17 @@
 from werkzeug.routing import BaseConverter
 from app.views.index import index_view
 from app.views.index import adventure_view as single_adventure_view
+from app.views.index import image_view
+from app.views.adventure_rest import adventure_view
+from app.views.adventure_rest import nearest_adventures_view
 
-from app.views.adventure_rest import (
-    adventure_view,
-    nearest_adventures_view
-)
-from app.views.auth_rest import (
-    signup_view,
-    login_view
-)
-from app.views.engagements_rest import (
-    like_view
-)
+from app.views.adventure_rest import add_image
+
+from app.views.auth_rest import signup_view
+from app.views.auth_rest import login_view
+
+from app.views.engagements_rest import like_view
+
 
 # Based on http://stackoverflow.com/a/5872904
 class RegexConverter(BaseConverter):
@@ -42,6 +41,17 @@ def setup_routes(app):
         '/adventure/<regex("[0-9a-fA-F]{24}"):id_>',
         'adventure_view',
         view_func=single_adventure_view,
+    )
+    app.add_url_rule(
+        '/adventure/<regex("[0-9a-fA-F]{24}"):adventure_id>/add_image',
+        'adventure_image_uploader',
+        methods=['POST'],
+        view_func=add_image,
+    )
+    app.add_url_rule(
+        '/image/<regex("[0-9a-fA-F]{24}"):image_id>',
+        'image',
+        view_func=image_view,
     )
     app.add_url_rule(
         '/adventure/<regex("[0-9a-fA-F]{24}"):id_>/likes',
