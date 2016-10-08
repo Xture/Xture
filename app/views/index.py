@@ -22,6 +22,18 @@ def adventure_view(id_):
     )
 
 
+def adventure_add_view():
+    return render_template(
+        'add_adventure.html',
+    )
+
+
+def nearest_adventures():
+    return render_template(
+        'nearest_adventures.html',
+    )
+
+
 def image_view(image_id):
     import gridfs
     from bson import ObjectId
