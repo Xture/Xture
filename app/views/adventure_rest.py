@@ -1,5 +1,3 @@
-import mimetypes
-
 from flask import request
 from flask import url_for
 import magic as friendship  # cause friendship is magic
@@ -59,7 +57,7 @@ def add_image(adventure_id):
     if not adv:
         return {"status": "error"}, 404
 
-    image = request.files['img'] 
+    image = request.files['img']
     buf = image.stream.read()
     image.stream.seek(0)
     mime = friendship.from_buffer(buf, mime=True)
@@ -74,13 +72,11 @@ def add_image(adventure_id):
         }
     return (
         {
-            "status": "error", 
+            "status": "error",
             "reason": "Filetype {} is not allowed".format(mime),
-        }, 
+        },
         400,
     )
-    
-        
 
 
 @to_json

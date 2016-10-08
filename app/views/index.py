@@ -31,11 +31,11 @@ def image_view(image_id):
         image_stream = grid_fs.get(id_)
         buf = image_stream.read()
         response = make_response(buf)
-        mime = friendship.from_buffer(buf, mime=True) 
+        mime = friendship.from_buffer(buf, mime=True)
         response.mimetype = mime
         return response
     abort(404)
-        
+
 
 def test_post_mongo():
     mongo.db.test.insert_one({"lol": 'lol'})
