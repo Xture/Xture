@@ -1,12 +1,10 @@
 from werkzeug.routing import BaseConverter
-from app.views.index import (
-    index_view,
-    test_post_mongo,
-    test_get_mongo,
-)
+from app.views.index import index_view
 from app.views.index import adventure_view as single_adventure_view
+
 from app.views.adventure_rest import (
-    adventure_view
+    adventure_view,
+    nearest_adventures_view
 )
 
 
@@ -27,6 +25,11 @@ def setup_routes(app):
         'create_adventure_view',
         methods=['POST', 'GET'],
         view_func=adventure_view,
+    )
+    app.add_url_rule(
+        '/adventure/nearest/',
+        'nearest_adventures',
+        view_func=nearest_adventures_view,
     )
     app.add_url_rule(
         '/adventure/<regex("[0-9a-fA-F]{24}"):id_>',

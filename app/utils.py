@@ -15,13 +15,13 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, o)
 
 
-def validate_json(format_):
+def validate_input(format_, location='json'):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
             if request.method != 'POST':
                 return func(*args, **kwargs)
-            data = request.json
+            data = getattr(request, location)
             try:
                 validate(data, format_)
                 return func(*args, **kwargs)

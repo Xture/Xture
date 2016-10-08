@@ -15,7 +15,7 @@ def get_list_of_adventures():
     return ls_
 
 
-def get_nearest_points(lat, lng, min_dist=0, max_dist=10000):
+def get_nearest(lat, lng, min_dist=0, max_dist=1000):
     query = {
         'location': {
             '$near': {
@@ -26,4 +26,4 @@ def get_nearest_points(lat, lng, min_dist=0, max_dist=10000):
         }
     }
     places = mongo.db.adventure.find(query)
-    return places
+    return list(places)
