@@ -3,7 +3,10 @@ from app.views.index import (
     index_view,
     test_post_mongo,
     test_get_mongo,
-    adventure_view,
+)
+from app.views.index import adventure_view as single_adventure_view
+from app.views.adventure_rest import (
+    adventure_view
 )
 
 
@@ -20,16 +23,13 @@ def setup_routes(app):
         view_func=index_view
     )
     app.add_url_rule(
-        '/adventure/<regex("[0-9a-fA-F]{24}"):id_>',
-        'adventure_view',
+        '/adventure/',
+        'create_adventure_view',
+        methods=['POST', 'GET'],
         view_func=adventure_view,
     )
     app.add_url_rule(
-        '/test', 'get',
-        view_func=test_get_mongo,
-    )
-    app.add_url_rule(
-        '/test/post', 'post',
-        view_func=test_post_mongo,
-        methods=['POST'],
+        '/adventure/<regex("[0-9a-fA-F]{24}"):id_>',
+        'adventure_view',
+        view_func=single_adventure_view,
     )
