@@ -2,6 +2,10 @@ from app import mongo
 
 
 def create_adventure(*args, **kwargs):
+    try:
+        kwargs['images']
+    except KeyError:
+        kwargs['images'] = []
     mongo.db.adventure.insert(kwargs)
 
 

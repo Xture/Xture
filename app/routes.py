@@ -2,7 +2,9 @@ from werkzeug.routing import BaseConverter
 from app.views.index import index_view
 
 from app.views.index import adventure_view as single_adventure_view
+from app.views.index import image_view
 from app.views.adventure_rest import adventure_view
+from app.views.adventure_rest import add_image
 
 
 # Based on http://stackoverflow.com/a/5872904
@@ -27,4 +29,15 @@ def setup_routes(app):
         '/adventure/<regex("[0-9a-fA-F]{24}"):id_>',
         'adventure_view',
         view_func=single_adventure_view,
+    )
+    app.add_url_rule(
+        '/adventure/<regex("[0-9a-fA-F]{24}"):adventure_id>/add_image',
+        'adventure_image_uploader',
+        methods=['POST'],
+        view_func=add_image,
+    )
+    app.add_url_rule(
+        '/image/<regex("[0-9a-fA-F]{24}"):image_id>',
+        'image',
+        view_func=image_view,
     )
