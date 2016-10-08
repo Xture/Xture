@@ -49,6 +49,14 @@ containers:
     - !NpmDependencies
       file: package.json
 
+  codestyle:
+    setup:
+    - !Alpine v3.4
+    - !PipConfig
+      dependencies: true
+      python-exe: python3.5
+    - !Py3Install [flake8]
+
 commands:
   _init_db: !Command
     description: Init collection in mongo
@@ -79,5 +87,12 @@ commands:
       <<: *node_env
       NODE_ENV: production
     run: [webpack]
+
+  codestyle: !Command
+    description: Run codestyle check
+    container: codestyle
+    run:
+    - flake8
+    - --exclude=./.vagga
 
 
