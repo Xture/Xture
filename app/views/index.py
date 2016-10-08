@@ -1,12 +1,7 @@
 from flask import render_template, jsonify
-from flask import current_app
-from flask import request
 
 from app import mongo
-from app.bl.adventure_resource import (
-    get_adventure_by_id,
-    create_adventure,
-)
+from app.bl.adventure_resource import get_adventure_by_id
 
 
 def index_view():
@@ -20,6 +15,7 @@ def adventure_view(id_):
         'view_adventure.html',
         adventure=adv,
     )
+
 
 def test_post_mongo():
     mongo.db.test.insert_one({"lol": 'lol'})
