@@ -1,7 +1,8 @@
 from flask import render_template, jsonify
-from flask import current_app as app
+from flask import current_app
 from flask import request
 
+from app import mongo
 from app.utils import objectid_fix
 from app.business_logic.adventure_resource import (
     get_adventure_by_id,
@@ -31,10 +32,10 @@ def create_adventure_view():
 
 
 def test_post_mongo():
-    app.db.test.insert_one({"lol": 'lol'})
+    mongo.db.test.insert_one({"lol": 'lol'})
     return jsonify({})
 
 
 def test_get_mongo():
-    ls_ = objectid_fix(list(app.db.test.find()))
+    ls_ = objectid_fix(list(mongo.db.test.find()))
     return jsonify(ls_)
