@@ -17,6 +17,10 @@ def adventure_view(id_):
     )
 
 
+def log_in_view():
+    return render_template('auth_form.html')
+
+
 def test_post_mongo():
     mongo.db.test.insert_one({"lol": 'lol'})
     return jsonify({})

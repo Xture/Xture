@@ -1,5 +1,5 @@
 from werkzeug.routing import BaseConverter
-from app.views.index import index_view
+from app.views.index import index_view, log_in_view
 
 from app.views.index import adventure_view as single_adventure_view
 from app.views.adventure_rest import adventure_view
@@ -27,4 +27,9 @@ def setup_routes(app):
         '/adventure/<regex("[0-9a-fA-F]{24}"):id_>',
         'adventure_view',
         view_func=single_adventure_view,
+    )
+    app.add_url_rule(
+        '/sign_in',
+        'sign_in',
+        view_func=log_in_view,
     )
