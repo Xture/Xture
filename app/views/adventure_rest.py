@@ -20,7 +20,8 @@ adventure_schema = {
                 'type': 'number'
             },
             "maxItems": 2
-        }
+        },
+        'title': {'type': 'string'}
     },
     "required": ["location", "description"]
 }
