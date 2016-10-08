@@ -1,6 +1,7 @@
 from flask import request
 from app.utils import validate_input
 from app.utils import to_json
+from app.utils import is_authenticated
 from app.bl.adventure_resource import create_adventure
 from app.bl.adventure_resource import get_list_of_adventures
 from app.bl.adventure_resource import get_nearest
@@ -32,6 +33,7 @@ nearest_args = {
 
 
 @to_json
+@is_authenticated
 @validate_input(adventure_schema)
 def adventure_view():
     if request.method == 'POST':
@@ -44,6 +46,7 @@ def adventure_view():
 
 
 @to_json
+@is_authenticated
 @validate_input(nearest_args, location='args')
 def nearest_adventures_view():
     args_ = request.args
