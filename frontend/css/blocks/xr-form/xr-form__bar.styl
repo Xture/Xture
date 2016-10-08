@@ -1,0 +1,21 @@
+.xr-form__bar
+  position: relative
+  display: block
+  width: $input-field-width
+
+  &:before,
+  &:after
+    position: absolute
+    content: ''
+    height: $bar-height
+    width: 0
+    bottom: 1px
+    background-color: $bar-color
+    transition: 200ms ease all
+
+  &:before
+    left: 50%
+
+  &:after
+    right: 50%
+
