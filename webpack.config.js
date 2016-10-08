@@ -29,7 +29,7 @@ module.exports = {
             },
             {
                 test: /\.(svg|png|jpg|gif)$/,
-                loader: 'file?name=img/[name].[ext]'
+                loader: 'file?name=static/assets/[name].[ext]'
             },
             {
                 test: /\.js$/,
