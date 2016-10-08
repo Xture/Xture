@@ -6,7 +6,10 @@ from app.views.adventure_rest import (
     adventure_view,
     nearest_adventures_view
 )
-
+from app.views.auth_rest import (
+    signup_view,
+    login_view
+)
 
 # Based on http://stackoverflow.com/a/5872904
 class RegexConverter(BaseConverter):
@@ -35,4 +38,16 @@ def setup_routes(app):
         '/adventure/<regex("[0-9a-fA-F]{24}"):id_>',
         'adventure_view',
         view_func=single_adventure_view,
+    )
+    app.add_url_rule(
+        '/auth/signup',
+        'signup',
+        view_func=signup_view,
+        methods=['POST']
+    )
+    app.add_url_rule(
+        '/auth/login',
+        'login',
+        view_func=login_view,
+        methods=['POST']
     )

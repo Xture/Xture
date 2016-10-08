@@ -1,15 +1,15 @@
 import os
 
+import redis
 from flask import Flask
 from flask_script import Manager
 from flask_pymongo import PyMongo
 
 
-
 app = Flask(__name__, static_folder='../static')
 manager = Manager(app)
 filepath = os.getenv('APP_CONFIG')
-
+cache = redis.StrictRedis(host='localhost', port=6380, db=0)
 abspath = os.path.abspath(filepath)
 app.config.from_pyfile(abspath)
 

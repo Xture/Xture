@@ -5,6 +5,7 @@ from jsonschema import (
 )
 from functools import wraps
 import json
+from app import cache
 from bson import ObjectId
 
 
@@ -13,6 +14,20 @@ class JSONEncoder(json.JSONEncoder):
         if isinstance(o, ObjectId):
             return str(o)
         return json.JSONEncoder.default(self, o)
+
+
+def is_authenticated(func):
+    def wrapper(*args, **kwargs):
+        if 'Authorization' not in request.headers:
+            return {'message': 'No authorization provided'}, 401
+        token = request.headers['Authorization']
+        user_id = cache.get(token)
+        if user_id:
+            setattr(request, 'user_id', user_id)
+            return func(*args, **kwargs)
+        else:
+            return {'message': 'token is missing or expired'}, 403
+    return wrapper
 
 
 def validate_input(format_, location='json'):
