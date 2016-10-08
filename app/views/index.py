@@ -4,7 +4,7 @@ from flask import request
 
 from app import mongo
 from app.utils import objectid_fix
-from app.business_logic.adventure_resource import (
+from app.bl.adventure_resource import (
     get_adventure_by_id,
     create_adventure,
 )
