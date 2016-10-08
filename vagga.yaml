@@ -28,9 +28,9 @@ containers:
     environ:
       MONGO_ARGS: ""
     volumes:
-      /data/db: !Tmpfs
-        size: 100M
-        mode: 0o700
+      /data/db: !Persistent
+        name: mongo-storage
+        init-command: _init_db
 
   python:
     setup:
@@ -50,14 +50,29 @@ containers:
       file: package.json
 
 commands:
-  run: &run !Command
+  _init_db: !Command
+    description: Init collection in mongo
+    container: mongodb
+    run: |
+        mongod ${MONGO_ARGS} --fork --syslog
+        bash /work/populate.sh
+        mongod --shutdown
+
+  run: !Supervise
     description: Run this application
-    tags: [app, python]
-    container: python
-    environ: *local_env
-    run:
-    - python3
-    - run.py
+    mode: stop-on-failure
+    children:
+      mongo: !Command
+        description: Run mongodb server
+        container: mongodb
+        run: mongod ${MONGO_ARGS}
+
+      python: !Command
+        container: python
+        environ: *local_env
+        run:
+        - python3
+        - run.py
 
   webpack: !Command
     description: Build static
