@@ -5,7 +5,8 @@ var path = require('path');
 module.exports = {
     resolve: {
         root: [
-            '/usr/local/lib/node_modules'
+            '/usr/local/lib/node_modules',
+            '/work/frontend/js',
         ]
     },
     context: path.join(__dirname, 'frontend'),
@@ -24,7 +25,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.(eot|woff|woff2|ttf|otf)$/,
-                loader: 'file?name=fonts/[name].[ext]'
+                loader: 'file?name=static/fonts/[name].[ext]'
             },
             {
                 test: /\.(svg|png|jpg|gif)$/,

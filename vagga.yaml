@@ -10,6 +10,20 @@ _templates:
     /config: !BindRO /work/config
 
 containers:
+  redis:
+    setup:
+    - !Ubuntu xenial
+    - !UbuntuUniverse
+    - !Sh apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7917B12
+    - !UbuntuRepo
+      url: http://ppa.launchpad.net/chris-lea/redis-server/ubuntu
+      suite: xenial
+      components: [main]
+    - !Install
+      - redis-server
+    environ:
+      REDIS_PORT1: 6380
+
   mongodb:
     setup:
       - !Ubuntu xenial
@@ -41,6 +55,7 @@ containers:
       - libmagic-dev
     - !PipConfig { dependencies: true }
     - !Py3Requirements requirements.txt
+    - !Py3Install [pip]  # In order to make pip freeze
     - !EnsureDir /config
     environ:
       LANG: en_US.utf8
@@ -77,7 +92,10 @@ commands:
         description: Run mongodb server
         container: mongodb
         run: mongod ${MONGO_ARGS}
-
+      redis: !Command
+        container: redis
+        run: |
+          redis-server --daemonize no --port $REDIS_PORT1 --logfile "" --loglevel debug
       python: !Command
         container: python
         environ: *local_env
@@ -90,6 +108,14 @@ commands:
       <<: *node_env
       NODE_ENV: production
     run: [webpack]
+
+  webpack-watch: !Command
+    description: Build static
+    container: static
+    environ:
+      <<: *node_env
+      NODE_ENV: production
+    run: webpack --watch
 
   codestyle: !Command
     description: Run codestyle check

@@ -2,25 +2,42 @@
 
 {% block content %}
 
-    <div class="xr-header">
-        <div class="xr-header__title">
+    <div class="xr-card__container">
+        {#    This must be in for cycle for render cards#}
+        <div class="xr-card">
+            <img src="{{ url_for('static', filename="assets/sun.jpg") }}"
+                 class="xr-card__image"/>
+            <div class="xr-card__content">
+                <div class="xr-card__title">
+                    Some test title
+                </div>
+                <div class="xr-card__description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                </div>
+                <div class="xr-card__button">
+                    more..
+                </div>
+            </div>
+        </div>
 
-        </div>
-    </div>
-
-{#    This must be in for cycle for render cards#}
-    <div class="xr-card">
-        <div class="xr-card__image">
-
-        </div>
-        <div class="xr-card__title">
-            Some test title
-        </div>
-        <div class="xr-card__description">
-            Some test description
-        </div>
-        <div class="xr-class__button">
-            more..
+        <div class="xr-card">
+            <img src="{{ url_for('static', filename="assets/sun.jpg") }}"
+                 class="xr-card__image"/>
+            <div class="xr-card__content">
+                <div class="xr-card__title">
+                    Some test title
+                </div>
+                <div class="xr-card__description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                </div>
+                <div class="xr-card__button">
+                    more..
+                </div>
+            </div>
         </div>
     </div>
 

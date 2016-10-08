@@ -5,6 +5,7 @@ from jsonschema import (
 )
 from functools import wraps
 import json
+from app import cache
 from bson import ObjectId
 
 
@@ -12,16 +13,32 @@ class JSONEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, ObjectId):
             return str(o)
-        return json.JSONEncoder.default(self, o)
+        return json.JSONEncoder.default(self, o.decode('utf-8'))
 
 
-def validate_json(format_):
+def is_authenticated(func):
+    def wrapper(*args, **kwargs):
+        if 'Authorization' not in request.headers:
+            return {'message': 'No authorization provided'}, 401
+        token = request.headers['Authorization']
+
+        user_id = cache.get(token)
+        print(user_id)
+        if user_id:
+            setattr(request, 'user_id', str(user_id.decode('utf-8')))
+            return func(*args, **kwargs)
+        else:
+            return {'message': 'token is missing or expired'}, 403
+    return wrapper
+
+
+def validate_input(format_, location='json'):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
             if request.method != 'POST':
                 return func(*args, **kwargs)
-            data = request.json
+            data = getattr(request, location)
             try:
                 validate(data, format_)
                 return func(*args, **kwargs)

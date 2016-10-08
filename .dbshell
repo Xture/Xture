@@ -1,0 +1,5 @@
+db.adventure.update({'_id': ObjectId(adv_id)},                                            {'$pull': {'likes': {'likes.liker': uid}}})
+db.adventure.update({},{'$pull': {'likes': {'likes.liker': uid}}})
+db.adventure.update({},{'$pull': {'likes': {'likes.liker':'1234567809'}}})
+db.adventure.update({},{'$push': {'likes': {'likes.liker':'1234567809'}}})
+c
