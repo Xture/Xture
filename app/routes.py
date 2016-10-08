@@ -10,6 +10,7 @@ from app.views.adventure_rest import add_image
 
 from app.views.auth_rest import signup_view
 from app.views.auth_rest import login_view
+from app.views.auth_rest import vk_auth_view
 
 from app.views.engagements_rest import like_view
 
@@ -60,6 +61,7 @@ def setup_routes(app):
         methods=['POST'],
         view_func=like_view,
     )
+    # auth handlers
     app.add_url_rule(
         '/auth/signup',
         'signup',
@@ -71,4 +73,9 @@ def setup_routes(app):
         'login',
         view_func=login_view,
         methods=['POST']
+    )
+    app.add_url_rule(
+        '/auth/vk',
+        'vk_signup',
+        view_func=vk_auth_view,
     )

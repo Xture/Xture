@@ -16,3 +16,6 @@ __pycache__/
 
 # Ignore generated statics
 static/build/
+
+# Some secret tokens and variables
+secrets.py

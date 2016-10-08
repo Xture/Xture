@@ -1,7 +1,7 @@
 import React from 'react';
 import { Subject, BehaviorSubject } from 'rx';
 
-import Login from 'views/Login';
+import Login from '../views/Login/index';
 
 export const appBus = new Subject();
 
