@@ -34,7 +34,7 @@ def login_view():
     user = mongo.db.users.find_one(data)
     if user:
         token = str(uuid.uuid4())
-        cache.set(token, user['_id'], ex=86400)
+        cache.set(token, str(user['_id']), ex=86400)
         return {'token': token}
     else:
         return {"message": 'You are not authorized'}

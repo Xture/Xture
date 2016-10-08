@@ -13,7 +13,7 @@ class JSONEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, ObjectId):
             return str(o)
-        return json.JSONEncoder.default(self, o)
+        return json.JSONEncoder.default(self, o.decode('utf-8'))
 
 
 def is_authenticated(func):
@@ -21,9 +21,11 @@ def is_authenticated(func):
         if 'Authorization' not in request.headers:
             return {'message': 'No authorization provided'}, 401
         token = request.headers['Authorization']
+
         user_id = cache.get(token)
+        print(user_id)
         if user_id:
-            setattr(request, 'user_id', user_id)
+            setattr(request, 'user_id', str(user_id.decode('utf-8')))
             return func(*args, **kwargs)
         else:
             return {'message': 'token is missing or expired'}, 403
