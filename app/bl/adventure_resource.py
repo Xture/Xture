@@ -3,10 +3,7 @@ from bson import ObjectId
 
 
 def create_adventure(*args, **kwargs):
-    try:
-        kwargs['images']
-    except KeyError:
-        kwargs['images'] = []
+    kwargs['images'] = kwargs.get('images', [])
     mongo.db.adventure.insert(kwargs)
 
 
