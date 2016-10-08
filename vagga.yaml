@@ -49,9 +49,9 @@ containers:
   python:
     setup:
     - !Ubuntu xenial
-    - !Install [make]
     - !PipConfig { dependencies: true }
     - !Py3Requirements requirements.txt
+    - !Py3Install [pip]  # In order to make pip freeze
     - !EnsureDir /config
     environ:
       LANG: en_US.utf8
@@ -62,6 +62,14 @@ containers:
     - !Ubuntu xenial
     - !NpmDependencies
       file: package.json
+
+  codestyle:
+    setup:
+    - !Alpine v3.4
+    - !PipConfig
+      dependencies: true
+      python-exe: python3.5
+    - !Py3Install [flake8]
 
 commands:
   _init_db: !Command
@@ -96,5 +104,20 @@ commands:
       <<: *node_env
       NODE_ENV: production
     run: [webpack]
+
+  webpack-watch: !Command
+    description: Build static
+    container: static
+    environ:
+      <<: *node_env
+      NODE_ENV: production
+    run: webpack --watch
+
+  codestyle: !Command
+    description: Run codestyle check
+    container: codestyle
+    run:
+    - flake8
+    - --exclude=./.vagga
 
 
