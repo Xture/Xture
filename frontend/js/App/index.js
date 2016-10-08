@@ -3,6 +3,10 @@ import { Subject, BehaviorSubject } from 'rx';
 
 export const appBus = new Subject();
 
+/**
+ * Temporal implementation
+ * TODO: move it into custom module
+ */
 function Login(props) {
     return <div>test</div>;
 }
@@ -17,19 +21,30 @@ export default class Application extends React.Component {
         this.stateStream = new BehaviorSubject({
             currentView: 'Login',
         });
-        this.allowUpdateState = false;
 
-        this.stateStream.subscribe(({ currentView }) => {
-            if (this.allowUpdateState)  // Workaround, but works
-                this.setState({ currentView });
-        });
+        appBus.filter(
+            ({ action }) => action === 'ACTION_RENDER'
+        ).withLatestFrom(
+            stateStream,
+            (appData, streamData) => { currentView: appData.view }
+        ).merge(stateStream);
 
         this.render = this.render.bind(this);
         this.state = { currentView: 'Login' };
     }
 
     componentDidMount () {
-        this.allowUpdateState = true;
+        this.updateStateSubscription = this.stateStream.subscribe(
+            ({ currentView }) => {
+                this.setState({ currentView });
+            }
+        );
+    }
+
+    componetWillUnmount() {
+        if (this.updateStateSubscription) {
+            this.updateStateSubscription.dispose();
+        }
     }
 
     render() {
