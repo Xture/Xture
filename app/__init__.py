@@ -16,4 +16,6 @@ app.config.from_pyfile(abspath)
 mongo = PyMongo(app)
 
 from app.routes import setup_routes
+from app.routes import RegexConverter
+app.url_map.converters['regex'] = RegexConverter
 setup_routes(app)
