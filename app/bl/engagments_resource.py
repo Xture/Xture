@@ -24,3 +24,18 @@ def create_like(adv_id, uid):
         logger.debug('adding new like array for adv={}'.format(adv_id))
         mongo.db.adventure.update({'_id': ObjectId(adv_id)},
                                   {'$set': {'likes': [{'liker': uid}]}})
+
+
+def create_comment(adv_id, uid, text):
+    adventure = get_adventure_by_id(adv_id)
+    if not adventure:
+        logger.debug("no adventure with id " + str(adv_id))
+    if 'comments' in adventure:
+        logger.debug("push new comment " + str(adv_id))
+
+        mongo.db.adventure.update({'_id': ObjectId(adv_id)},
+                                  {'$push': {'comments': {'commenter': uid, 'text': text}}})
+    else:
+        logger.debug('adding new like array for adv={}'.format(adv_id))
+        mongo.db.adventure.update({'_id': ObjectId(adv_id)},
+                                  {'$set': {'comments': {'commenter': uid, 'text': text}}})

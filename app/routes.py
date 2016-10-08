@@ -11,7 +11,8 @@ from app.views.auth_rest import (
     login_view
 )
 from app.views.engagements_rest import (
-    like_view
+    like_view,
+    comment_view
 )
 
 # Based on http://stackoverflow.com/a/5872904
@@ -48,6 +49,12 @@ def setup_routes(app):
         'adv_likes',
         methods=['POST'],
         view_func=like_view,
+    )
+    app.add_url_rule(
+        '/adventure/<regex("[0-9a-fA-F]{24}"):id_>/comments',
+        'adv_comments',
+        methods=['POST'],
+        view_func=comment_view,
     )
     app.add_url_rule(
         '/auth/signup',
