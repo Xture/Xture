@@ -1,6 +1,8 @@
 # Xture
 Choose adventure for your ass
 
+[![Build Status](https://travis-ci.org/Xture/Xture.svg?branch=master)](https://travis-ci.org/Xture/Xture)
+
 # Running locally
 
 You need nothing but latest [vagga-testing](https://vagga.readthedocs.io) to run this application locally.
