@@ -1,4 +1,5 @@
 from app import mongo
+from bson import ObjectId
 
 
 def create_adventure(*args, **kwargs):
@@ -6,7 +7,7 @@ def create_adventure(*args, **kwargs):
 
 
 def get_adventure_by_id(_id):
-    adv = mongo.db.adventure.find_one({'_id': _id})
+    adv = mongo.db.adventure.find_one({'_id': ObjectId(_id)})
     return adv
 
 
@@ -15,7 +16,7 @@ def get_list_of_adventures():
     return ls_
 
 
-def get_nearest_points(lat, lng, min_dist=0, max_dist=10000):
+def get_nearest(lat, lng, min_dist=0, max_dist=1000):
     query = {
         'location': {
             '$near': {
@@ -26,4 +27,4 @@ def get_nearest_points(lat, lng, min_dist=0, max_dist=10000):
         }
     }
     places = mongo.db.adventure.find(query)
-    return places
+    return list(places)
