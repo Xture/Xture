@@ -21,15 +21,6 @@ def adventure_view(id_):
         adventure=adv,
     )
 
-
-def create_adventure_view():
-    input_data = request.form
-    try:
-        create_adventure(**input_data)
-    except:
-        return jsonify({}), 400
-
-
 def test_post_mongo():
     mongo.db.test.insert_one({"lol": 'lol'})
     return jsonify({})
