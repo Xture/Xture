@@ -11,7 +11,8 @@ module.exports = {
     },
     context: path.join(__dirname, 'frontend'),
     entry: {
-        'main': './js/index.js'
+        'main': './js/main.bundle.js',
+        'sw': './js/sw.bundle.js',
     },
     resolveLoader: {
         root: '/usr/local/lib/node_modules'

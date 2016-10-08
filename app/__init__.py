@@ -22,6 +22,11 @@ app.json_encoder = JSONEncoder
 # mongodb setup
 mongo = PyMongo(app)
 
+@app.after_request
+def set_service_worker_allowed_header(resp):
+    resp.headers.add('Service-Worker-Allowed', '/')
+    return resp
+
 # Configuring logging
 formatter = logging.Formatter(
     "[%(name)s][%(levelname)s] %(filename)s:%(lineno)d - %(message)s"
