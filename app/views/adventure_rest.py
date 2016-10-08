@@ -33,6 +33,7 @@ def adventure_view():
         data = get_list_of_adventures()
         return data, 200
 
+
 @to_json
 @validate_json({})
 def push_notification_view():
