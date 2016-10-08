@@ -26,7 +26,14 @@ def adventure_view():
     if request.method == 'POST':
         data = request.json
         create_adventure(**data)
-        return {}
+        return {"status": "OK"}
     if request.method == 'GET':
+        args_ = request.args
+        #lat, lng = args_['lat'], args_['lng']
         data = get_list_of_adventures()
         return data, 200
+
+@to_json
+@validate_json({})
+def push_notification_view():
+    pass
