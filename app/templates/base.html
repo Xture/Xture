@@ -10,7 +10,7 @@
     </title>
     <link rel="stylesheet"
           href="{{ url_for('static',filename='build/css/main.css') }}">
-    <script src="{{ url_for('static', filename='build/js/main.bundle.js') }}"></script>
+
     {% block extra_styles %}{% endblock %}
 </head>
 <body>
@@ -26,6 +26,7 @@
 
         {% endblock %}
     </div>
-    {% block extra_scripts %}{% endblock %}
+</div>
+    <script src="{{ url_for('static', filename='build/js/main.bundle.js') }}"></script>
 </body>
 </html>

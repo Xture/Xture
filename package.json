@@ -16,6 +16,7 @@
   "author": "Xture",
   "license": "MIT",
   "dependencies": {
+    "bazooka": "^0.5.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "rx": "^4.1.0"

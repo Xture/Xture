@@ -1,6 +1,7 @@
 from app import mongo
 from bson import ObjectId
 
+from app import logger
 
 def create_adventure(*args, **kwargs):
     kwargs['images'] = kwargs.get('images', [])
@@ -14,6 +15,7 @@ def get_adventure_by_id(_id):
 
 def get_list_of_adventures():
     ls_ = list(mongo.db.adventure.find())
+    logger.debug(ls_)
     return ls_
 
 
