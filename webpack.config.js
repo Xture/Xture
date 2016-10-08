@@ -5,7 +5,8 @@ var path = require('path');
 module.exports = {
     resolve: {
         root: [
-            '/usr/local/lib/node_modules'
+            '/usr/local/lib/node_modules',
+            '/work/frontend/js',
         ]
     },
     context: path.join(__dirname, 'frontend'),

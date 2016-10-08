@@ -10,10 +10,10 @@
     </title>
     <link rel="stylesheet"
           href="{{ url_for('static',filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='js/main.bundle.js') }}"></script>
     {% block extra_styles %}{% endblock %}
 </head>
 <body>
-
 <div class="xr-wrapper">
     <div class="xr-header">
         <div class="xr-header__title">
@@ -21,11 +21,11 @@
         </div>
     </div>
 
+    <div class="xr-wrapper">
+        {% block content %}
 
-    {% block content %}
-
-    {% endblock %}
-</div>
-{% block extra_scripts %}{% endblock %}
+        {% endblock %}
+    </div>
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>
