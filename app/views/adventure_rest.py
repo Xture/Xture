@@ -1,6 +1,8 @@
-from flask import request, jsonify
-from app.utils import validate_json, to_json
-from app.business_logic.adventure_resource import create_adventure, get_list_of_adventures
+from flask import request
+from app.utils import validate_json
+from app.utils import to_json
+from app.bl.adventure_resource import create_adventure
+from app.bl.adventure_resource import get_list_of_adventures
 
 adventure_schema = {
     "type": "object",
@@ -13,7 +15,8 @@ adventure_schema = {
             },
             "maxItems": 2
         }
-    }
+    },
+    "required": ["location", "description"]
 }
 
 
