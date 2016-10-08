@@ -1,35 +1,9 @@
 import React from 'react';
 import { Subject, BehaviorSubject } from 'rx';
 
+import Login from 'views/Login';
+
 export const appBus = new Subject();
-
-/**
- * Temporal implementation
- * TODO: move it into custom module
- */
-function Login(props) {
-    return <div
-        style={{ marginTop: "200px" }}
-        onClick={
-            () => appBus.onNext({
-                action: 'ACTION_RENDER',
-                view: 'AnotherLogin'
-            })
-        }
-    >test</div>;
-}
-
-function AnotherLogin(props) {
-    return <div
-        style={{ marginTop: "200px" }}
-        onClick={
-            () => appBus.onNext({
-                action: 'ACTION_RENDER',
-                view: 'AnotherLogin',
-            })
-        }
-    >asdasdasdasd</div>;
-}
 
 export default class Application extends React.Component {
     constructor(props) {
@@ -37,7 +11,6 @@ export default class Application extends React.Component {
 
         this.availableViews = {
             Login, 
-            AnotherLogin,
         };
         this.stateStream = new BehaviorSubject({
             currentView: 'Login',
