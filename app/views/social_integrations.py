@@ -19,7 +19,6 @@ def vk_signup(code):
                   'client_secret': client_secret, 'code': code})
     data = requests.post(VK_SIGNUP_URL, params={'client_id': client_id, 'redirect_uri': redirect_uri,
                          'client_secret': client_secret, 'code': code}).json()
-    logger.debug(data['access_token'])
     logger.debug(data['user_id'])
 
     return data['access_token'], data['user_id']

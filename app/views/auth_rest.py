@@ -80,4 +80,4 @@ def vk_auth_view():
     else:
         logger.debug('old user')
         cache.set(x_token, str(user['_id']), ex=86400)
-    return "<script>\nwindow.opener.localStorage.setItem('token','{}'); window.close()\n</script>".format(x_token)
+    return "<script>\nwindow.opener.localStorage.setItem('token','{}'); window.opener.location='/adventures/new';window.close()\n</script>".format(x_token)

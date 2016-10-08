@@ -5,6 +5,9 @@ import Login from '../views/Login/index';
 
 export const appBus = new Subject();
 
+function initMap() {
+    
+}
 export default class Application extends React.Component {
     constructor(props) {
         super(props);

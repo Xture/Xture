@@ -1,23 +1,24 @@
 import React from 'react';
 import Rx from 'rx';
 
+// Then, render it:
 export default class CreateAdventureForm extends React.Component {
-
 	constructor() {
 		super();
 		this.state = {
 			description: "",
 			title: "",
-			location: [0, 0]
+			longitude: 0,
+			latitude: 0
 		};
 	}
 
-	componentDidUpdate() {
+	componentDidMount() {
 		navigator.geolocation.getCurrentPosition((possition) => {
 			// body...
-			var cords = possition.coords;
-			location = [cords.latitude, cords.longtitude];
-			this.state.location = location;
+			let cords = possition.coords;
+			this.setState({'latitude': cords.latitude});
+			this.setState({'longitude': cords.longitude});
 		});
 	}
 
@@ -34,27 +35,54 @@ export default class CreateAdventureForm extends React.Component {
 			});
 	}
 
+    handleInputDesc(event) {
+       this.setState({ description: event.target.value });
+    }
+
+    handleInputTitle(event) {
+       this.setState({ title: event.target.value });
+    }
+
 	render() {
 		return (
-			<div>
-				<label for="">Title:
-					<input value={this.state.title} type="text"></input>
-				</label>
+			<div className="xr-form">
+				<div>
+					<input value={this.state.title} onChange={this.handleInputDesc} type="text"
+						className="xr-form__input xr-form__input_focus xr-form__input_active"></input>
+				    <span className="xr-form__bar"></span>
+                    <label className="xr-form__label">
+                        Title
+                    </label>
+				</div>
 
-				<label for="">Description:
-					<input value={this.state.description} type="text"></input>
-				</label>
-				<h3>Coordinates:</h3>
-				<hr />
-				<label for="">Description:
-					<input value={this.state.location[0]} type="number"></input>
-				</label>
+				<div className="xr-form__group">
+					<input value={this.state.description} onChange={this.handleInputDesc} type="text"
+						className="xr-form__input xr-form__input_focus xr-form__input_active"></input>
+				    <span className="xr-form__bar"></span>
+                    <label className="xr-form__label">
+                        Description
+                    </label>
+				</div>
+				<div className="xr-form__group">
+					<input value={this.state.longitude} type="number" 
+						className="xr-form__input xr-form__input_focus xr-form__input_active" disabled='disabled'></input>
+				    <span className="xr-form__bar"></span>
+                    <label className="xr-form__label">
+                        Longitude
+                    </label>
+				</div>
 
-				<label for="">Description:
-					<input value={this.state.location[1]} type="number"></input>
-				</label>
-				
-				<button onClick={this.submit}>Create adventure</button>
+				<div className="xr-form__group">
+					<input value={this.state.latitude} type="number"
+						className="xr-form__input xr-form__input_focus xr-form__input_active" disabled='disabled'></input>
+				    <span className="xr-form__bar"></span>
+                    <label className="xr-form__label">
+                        Latitude
+                    </label>
+				</div>
+	            <div onClick={this.submit} className="xr-form__button">
+					<div className="xr-form__button-text" >Create adventure</div>
+                </div>
 			</div>
 		);
 	}
