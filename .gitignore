@@ -15,4 +15,4 @@ __pycache__/
 *.pyc
 
 # Ignore generated statics
-static/
+static/build/

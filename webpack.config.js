@@ -17,7 +17,7 @@ module.exports = {
         root: '/usr/local/lib/node_modules'
     },
     output: {
-        path: './static',
+        path: './static/build',
         filename: 'js/[name].bundle.js',
         publicPath: '/'
     },
