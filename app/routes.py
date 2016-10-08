@@ -1,5 +1,6 @@
 from werkzeug.routing import BaseConverter
 from app.views.index import index_view
+
 from app.views.index import adventure_view as single_adventure_view
 from app.views.index import image_view
 from app.views.adventure_rest import adventure_view

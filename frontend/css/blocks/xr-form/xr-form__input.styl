@@ -1,0 +1,18 @@
+.xr-form__input
+  display: block
+  font-size: 1.125rem
+  padding: 10px 10px 10px 5px
+  width: $input-field-width
+  border: none
+  border-bottom: 1px solid $highlight-form-color
+
+.xr-form__input:focus ~ .xr-form__label,
+.xr-form__input:valid ~ .xr-form__label
+  top: - ($padding-unit-form * 2)
+  font-size: 0.875rem
+  color: $label-active-color
+
+
+.xr-form__input:focus ~ .xr-form__bar:before,
+.xr-form__input:focus ~ .xr-form__bar:after
+  width: 50%
