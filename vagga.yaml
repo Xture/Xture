@@ -70,9 +70,7 @@ commands:
       python: !Command
         container: python
         environ: *local_env
-        run:
-        - python3
-        - run.py
+        run: python3 /work/manage.py runserver --host=0.0.0.0 --port=5000
 
   webpack: !Command
     description: Build static

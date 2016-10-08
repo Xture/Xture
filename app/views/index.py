@@ -1,8 +1,13 @@
 from flask import render_template, jsonify
 from flask import current_app as app
 from flask import request
-from ..utils import objectid_fix
-from ..business_logic.adventure_resource import get_adventure_by_id, create_adventure
+
+from app.utils import objectid_fix
+from app.business_logic.adventure_resource import (
+    get_adventure_by_id,
+    create_adventure,
+)
+
 
 def index_view():
     return render_template('index.html')
@@ -15,6 +20,7 @@ def adventure_view(id_):
         'view_adventure.html',
         adventure=adv,
     )
+
 
 def create_adventure_view():
     input_data = request.form
