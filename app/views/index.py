@@ -3,7 +3,6 @@ from flask import current_app
 from flask import request
 
 from app import mongo
-from app.utils import objectid_fix
 from app.bl.adventure_resource import (
     get_adventure_by_id,
     create_adventure,
@@ -37,5 +36,5 @@ def test_post_mongo():
 
 
 def test_get_mongo():
-    ls_ = objectid_fix(list(mongo.db.test.find()))
+    ls_ = list(mongo.db.test.find())
     return jsonify(ls_)
