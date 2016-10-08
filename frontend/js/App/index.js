@@ -8,7 +8,27 @@ export const appBus = new Subject();
  * TODO: move it into custom module
  */
 function Login(props) {
-    return <div>test</div>;
+    return <div
+        style={{ marginTop: "200px" }}
+        onClick={
+            () => appBus.onNext({
+                action: 'ACTION_RENDER',
+                view: 'AnotherLogin'
+            })
+        }
+    >test</div>;
+}
+
+function AnotherLogin(props) {
+    return <div
+        style={{ marginTop: "200px" }}
+        onClick={
+            () => appBus.onNext({
+                action: 'ACTION_RENDER',
+                view: 'AnotherLogin',
+            })
+        }
+    >asdasdasdasd</div>;
 }
 
 export default class Application extends React.Component {
@@ -17,17 +37,17 @@ export default class Application extends React.Component {
 
         this.availableViews = {
             Login, 
+            AnotherLogin,
         };
         this.stateStream = new BehaviorSubject({
             currentView: 'Login',
         });
 
-        this.stateStream = appBus.filter(
+        appBus.filter(
             ({ action }) => action === 'ACTION_RENDER'
-        ).withLatestFrom(
-            this.stateStream,
-            (appData, streamData) => { currentView: appData.view }
-        ).merge(this.stateStream);
+        ).subscribe(({ view }) => {
+            this.stateStream.onNext({ currentView: view })
+        });
 
         this.render = this.render.bind(this);
         this.state = { currentView: 'Login' };
