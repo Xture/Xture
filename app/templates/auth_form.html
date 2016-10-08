@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <form class="xr-form">
+            <div class="xr-form__group">
+                <input type="text"
+                       required
+                       class="xr-form__input
+                          xr-form__input_focus
+                          xr-form__input_active">
+                <span class="xr-form__bar"></span>
+                <label for=""
+                       class="xr-form__label">
+                    Login
+                </label>
+            </div>
+
+            <div class="xr-form__group">
+                <input type="password"
+                       required
+                       class="xr-form__input
+                          xr-form__input_focus
+                          xr-form__input_active">
+                <span class="xr-form__bar"></span>
+                <label for=""
+                       class="xr-form__label">
+                    Password
+                </label>
+
+            </div>
+            <div class="xr-form__button">
+                <div class="xr-form__button-text">
+                    log in
+                </div>
+            </div>
+        </form>
+{% endblock content %}
