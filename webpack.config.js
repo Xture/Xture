@@ -24,7 +24,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.(eot|woff|woff2|ttf|otf)$/,
-                loader: 'file?name=fonts/[name].[ext]'
+                loader: 'file?name=static/fonts/[name].[ext]'
             },
             {
                 test: /\.(svg|png|jpg|gif)$/,

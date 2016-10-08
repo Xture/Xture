@@ -9,15 +9,23 @@
         {% endblock %}
     </title>
     <link rel="stylesheet"
-      href="{{ url_for('static',filename='css/main.css') }}">
+          href="{{ url_for('static',filename='css/main.css') }}">
     {% block extra_styles %}{% endblock %}
 </head>
 <body>
 
-{% block content %}
+<div class="xr-wrapper">
+    <div class="xr-header">
+        <div class="xr-header__title">
+            Xture
+        </div>
+    </div>
 
-{% endblock %}
 
+    {% block content %}
+
+    {% endblock %}
+</div>
 {% block extra_scripts %}{% endblock %}
 </body>
 </html>
