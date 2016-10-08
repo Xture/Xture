@@ -6,7 +6,6 @@ export default class extends React.Component {
 
     render() {
         return <div>
-            <!-- Images -->
             <div class="f-column-left">
                 <div class="f-map">
                     <span>Latitude: {this.props.location[0]}</span>
@@ -20,7 +19,6 @@ export default class extends React.Component {
                 </div>
             </div>
 
-            <!-- Info -->
             <div class="f-column-right">
                 <h1 class="f-title">${this.props.title}</h1>
                 <div class="f-desctiption">

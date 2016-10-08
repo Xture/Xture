@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 
-import AllAdventuresList from 'view';
+import AllAdventuresList from './view';
 
 
 export default (node) => {
