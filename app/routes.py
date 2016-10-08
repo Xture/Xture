@@ -1,13 +1,8 @@
 from werkzeug.routing import BaseConverter
-from app.views.index import (
-    index_view,
-    test_post_mongo,
-    test_get_mongo,
-)
+from app.views.index import index_view
+
 from app.views.index import adventure_view as single_adventure_view
-from app.views.adventure_rest import (
-    adventure_view
-)
+from app.views.adventure_rest import adventure_view
 
 
 # Based on http://stackoverflow.com/a/5872904
