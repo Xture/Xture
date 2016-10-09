@@ -6,7 +6,7 @@
         <h1>{{ adventure['title'] }}</h1>
         <div>{{ adventure['description'] }}</div>
         {% for imag in adventure['images'] %}
-            <img src="/image/{{ str(imag) }}"/>
+            <img src="/image/{{ imag.__str__() }}" width="400px"/>
         {% endfor %}
         <div id='map' class="col-md-10"
              style="width:500px; height:500px;"></div>
@@ -42,5 +42,8 @@
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuqzSrR-Tq4FYLWu3YeUUmd9mJCQQHYxk&callback=initMap"
                 async defer></script>
+    </div>
+    <div style="display: none">
+        {{ adventure }}
     </div>
 {% endblock %}
