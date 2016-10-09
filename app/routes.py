@@ -61,7 +61,7 @@ def setup_routes(app):
     )
 
     app.add_url_rule(
-        '/api/adventure/<regex("[0-9a-fA-F]{24}"):id_>',
+        '/adventure/<regex("[0-9a-fA-F]{24}"):id_>',
         'adventure_view',
         view_func=single_adventure_view,
     )

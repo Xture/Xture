@@ -6,6 +6,7 @@ import AllAdventuresList from './react_components/AllAdventuresList';
 import CreateAdventureForm from './react_components/CreateAdventureForm';
 import Login from './react_components/Login';
 import NearbyAdventuresList from './react_components/NearbyAdventuresList';
+import FullAdventure from './react_components/FullAdventure';
 
 import Baz from 'bazooka';
 
@@ -15,6 +16,7 @@ Baz.register({
     'CreateAdventureForm': CreateAdventureForm,
     'Login': Login,
     'NearbyAdventuresList': NearbyAdventuresList,
+    'FullAdventure': FullAdventure,
 });
 
 Baz.watch();
