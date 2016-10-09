@@ -19,16 +19,18 @@ export default class extends React.Component {
     }
 
     componentDidMount() {
-        var token = localStorage.token;
-        var headers = {'Authorization': token};
-        fetch('/api/adventure/',{headers})
-        .then((response) => response.json())
-        .then((json) => {
-            this.setState({
-                adventures: json,
-                fetched: true,
-            });
-        });
+        setTimeout(() => {
+            var token = localStorage.token;
+            var headers = {'Authorization': token};
+            fetch('/api/adventure/',{headers})
+                .then((response) => response.json())
+                .then((json) => {
+                    this.setState({
+                        adventures: json,
+                        fetched: true,
+                    });
+                });
+        }, 500);
     }
 
     renderSpinner() {
