@@ -2,4 +2,11 @@
 
 {% block content %}
     <div data-bazooka="FullAdventure"></div>
+    <div class="container">
+        <h1>{{ adventure['title'] }}</h1>
+        <div>{{ adventure['description'] }}</div>
+        {% for imag in adventure['images'] %}
+            <img src="/image/{{ str(imag) }}"/>
+        {% endfor %}
+    </div>
 {% endblock %}

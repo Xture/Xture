@@ -1,0 +1,15 @@
+list
+adventure
+adventure_schema
+help
+show dbs
+use xture
+help
+show collections
+adventure.add({title: Руфінг Московського мосту в Києві})
+show dbs
+use xture
+show collections
+find
+db.find
+show collection
