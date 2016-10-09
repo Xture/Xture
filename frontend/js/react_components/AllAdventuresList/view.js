@@ -1,7 +1,13 @@
 import React from 'react';
 import Adventure from '../Adventure/view'
 
-
+function AdventureListItem(props) {
+    return <a href={`/adventure/${props.id}`} className="f-list-item">
+        <span className="f-list-item-title">{props.title}</span>
+        <span className="f-list-item-descr">{props.description}</span>
+    </a>
+    
+}
 export default class extends React.Component {
 
     constructor() {
@@ -36,9 +42,8 @@ export default class extends React.Component {
     renderList() {
         return <div className="f-list_holder">
             {this.state.adventures.map(
-                (a) => <Adventure
-                    location={a.location}
-                    images={a.images}
+                (a) => <AdventureListItem
+                    id={a._id}
                     description={a.description}
                     title={a.title}
                 />
