@@ -23,12 +23,19 @@ export default class CreateAdventureForm extends React.Component {
 	}
 
 	submit() {
+		var token = localStorage.token;
+		var data = {
+			description: this.state.description,
+			title: this.state.title,
+			location: [this.state.longitude, this.state.latitude]
+		};
 		var data = {
 			method: 'POST',
-			body: this.state,
-			headers: {'Content-Type': 'application/json'}
+			body: JSON.stringify(data),
+			headers: {'Content-Type': 'application/json',
+					  'Authorization': token}
 		}
-		fetch('/adventure/', data)
+		fetch('/api/adventure/', data)
 			.then((response) => response.json())
 			.then((response) => {
 				console.log('successfuly created');
@@ -45,44 +52,47 @@ export default class CreateAdventureForm extends React.Component {
 
 	render() {
 		return (
-			<div className="xr-form">
-				<div>
-					<input value={this.state.title} onChange={this.handleInputDesc} type="text"
-						className="xr-form__input xr-form__input_focus xr-form__input_active"></input>
-				    <span className="xr-form__bar"></span>
-                    <label className="xr-form__label">
+			<div className="col-md-12 float-right form-horizontal">
+				<div className='col-xs-12 form-group'>
+                    <label className='col-xs-3 control-label'>
                         Title
                     </label>
+                    <div className='col-xs-9'>
+						<input value={this.state.title} onChange={this.handleInputTitle.bind(this)} type="text"
+							className="form-data form-control"></input>
+					</div>
 				</div>
-
-				<div className="xr-form__group">
-					<input value={this.state.description} onChange={this.handleInputDesc} type="text"
-						className="xr-form__input xr-form__input_focus xr-form__input_active"></input>
-				    <span className="xr-form__bar"></span>
-                    <label className="xr-form__label">
+				<div className='form-group'>
+                    <label className='col-xs-3 control-label'>
                         Description
                     </label>
+                    <div className='col-xs-9'>
+						<textarea value={this.state.description} onChange={this.handleInputDesc.bind(this)}
+							className='form-control'></textarea>
+					</div>
+
 				</div>
-				<div className="xr-form__group">
-					<input value={this.state.longitude} type="number" 
-						className="xr-form__input xr-form__input_focus xr-form__input_active" disabled='disabled'></input>
-				    <span className="xr-form__bar"></span>
-                    <label className="xr-form__label">
+				<div className='form-group'>
+                    <label className='col-xs-3 control-label'>
                         Longitude
                     </label>
+                    <div className="col-xs-9">
+						<input value={this.state.longitude} type="number"
+						 	disabled='disabled' className="col-xs-9 form-control"></input>
+					</div>
 				</div>
 
-				<div className="xr-form__group">
-					<input value={this.state.latitude} type="number"
-						className="xr-form__input xr-form__input_focus xr-form__input_active" disabled='disabled'></input>
-				    <span className="xr-form__bar"></span>
-                    <label className="xr-form__label">
-                        Latitude
+				<div className='form-group'>
+                    <label className="col-xs-3 control-label">
+	                    Latitude
                     </label>
+                    <div className="col-xs-9">
+						<input value={this.state.latitude} type="number"
+							className="form-control" disabled='disabled'>
+						</input>
+					</div>
 				</div>
-	            <div onClick={this.submit} className="xr-form__button">
-					<div className="xr-form__button-text" >Create adventure</div>
-                </div>
+	            <div onClick={this.submit.bind(this)} className="btn btn-success">Create adventure</div>
 			</div>
 		);
 	}

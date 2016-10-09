@@ -78,7 +78,7 @@ export default class Login extends React.Component {
                     <div className="xr-form__button-text" onClick={this.onSubmit}>Log In</div>
                 </div>
                 <div className="xr-form__button">
-                    <div className="xr-form__button-text" onClick={this.onVkSubmit}>Log In</div>
+                    <div className="xr-form__button-text" onClick={this.onVkSubmit}>Log In via VK</div>
                 </div>
             </div>
         );

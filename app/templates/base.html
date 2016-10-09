@@ -10,11 +10,12 @@
     </title>
     <link rel="stylesheet"
           href="{{ url_for('static',filename='build/css/main.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.js.css" >
 
     {% block extra_styles %}{% endblock %}
 </head>
 <body>
-    <div id="map" style="width:300px; height: 300px;"></div>
     <div>
         <div class="xr-header">
             <div class="xr-header__title">
@@ -28,36 +29,6 @@
             {% endblock %}
         </div>
     </div>
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-        var infoWindow = new google.maps.InfoWindow({map: map});
-
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuqzSrR-Tq4FYLWu3YeUUmd9mJCQQHYxk&callback=initMap" async defer></script>
     <script src="{{ url_for('static', filename='build/js/main.bundle.js') }}"></script>
 </body>
 </html>

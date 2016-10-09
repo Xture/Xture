@@ -49,7 +49,7 @@ IMG_MIMES = {
 
 
 @to_json
-# @is_authenticated
+@is_authenticated
 @validate_input(adventure_schema)
 def adventure_view():
     if request.method == 'POST':
