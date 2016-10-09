@@ -82,6 +82,11 @@ def add_image(adventure_id):
         images = adv.get('images', [])
         images.append(img_id)
         adv['images'] = images
+        mongo.db.adventure.update_one(
+            {'_id': adv['_id']},
+            {'$set': {'images': adv['images']}},
+            upsert=False,
+        )
         return {
             "status": "OK",
             "result": url_for('image', image_id=img_id),

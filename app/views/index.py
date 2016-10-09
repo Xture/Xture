@@ -18,7 +18,6 @@ def login_view():
 
 
 def adventure_view(id_):
-    # TODO: get adventure by id
     adv = get_adventure_by_id(id_)
     return render_template(
         'view_adventure.html',
