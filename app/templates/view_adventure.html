@@ -8,5 +8,39 @@
         {% for imag in adventure['images'] %}
             <img src="/image/{{ str(imag) }}"/>
         {% endfor %}
+        <div id='map' class="col-md-10"
+             style="width:500px; height:500px;"></div>
+        <script>
+            var map;
+            function initMap() {
+
+// To add the marker to the map, call setMap();
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15
+                });
+                var infoWindow = new google.maps.InfoWindow({map: map});
+
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent('Location found.');
+                        map.setCenter(pos);
+                    }, function () {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuqzSrR-Tq4FYLWu3YeUUmd9mJCQQHYxk&callback=initMap"
+                async defer></script>
     </div>
 {% endblock %}
