@@ -29,6 +29,8 @@
             {% endblock %}
         </div>
     </div>
+    {% block map %}
+    {% endblock %}
     <script src="{{ url_for('static', filename='build/js/main.bundle.js') }}"></script>
 </body>
 </html>

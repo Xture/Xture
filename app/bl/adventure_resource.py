@@ -19,7 +19,7 @@ def get_list_of_adventures():
     return ls_
 
 
-def get_nearest(lat, lng, min_dist=0, max_dist=1000):
+def get_nearest(lat, lng, min_dist=0, max_dist=10000):
     query = {
         'location': {
             '$near': {

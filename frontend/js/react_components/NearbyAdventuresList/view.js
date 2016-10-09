@@ -16,7 +16,7 @@ export default class extends React.Component {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    const lng = position.coords.longitude;
+                    /*const lng = position.coords.longitude;
                     const lat = position.coords.latitude;
 
                     var token = localStorage.token;
@@ -29,7 +29,7 @@ export default class extends React.Component {
                                 adventures: json,
                                 fetched: true,
                             });
-                        });
+                        });*/
                 },
                 (err) => { /* TODO: handle that */
                     // function showError(error) {

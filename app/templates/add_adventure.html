@@ -23,8 +23,8 @@
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lat: position.coords.latitude.toFixed(5),
+          lng: position.coords.longitude.toFixed(5)
         };
 
         infoWindow.setPosition(pos);

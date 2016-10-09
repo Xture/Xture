@@ -95,9 +95,15 @@ def add_image(adventure_id):
     )
 
 
+@to_json
 @is_authenticated
 @validate_input(nearest_args, location='args')
 def nearest_adventures_view():
     args_ = request.args
     lat, lng = float(args_['lat']), float(args_['lng'])
-    return {'nearest': get_nearest(lat, lng)}
+    logger.debug(lat)
+    logger.debug(lng)
+
+    data = {'nearest': get_nearest(lat, lng)}
+    logger.debug(data)
+    return data

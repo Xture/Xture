@@ -27,7 +27,7 @@ export default class CreateAdventureForm extends React.Component {
         var data = {
             description: this.state.description,
             title: this.state.title,
-            location: [this.state.longitude, this.state.latitude]
+            location: [this.state.latitude, this.state.longitude]
         };
         var data = {
             method: 'POST',
@@ -74,15 +74,6 @@ export default class CreateAdventureForm extends React.Component {
                     </div>
 
                 </div>
-                <div className='form-group'>
-                    <label className='col-xs-3 control-label'>
-                        Longitude
-                    </label>
-                    <div className="col-xs-9">
-                        <input value={this.state.longitude} type="number"
-                               disabled='disabled' className="col-xs-9 form-control"/>
-                    </div>
-                </div>
 
                 <div className='form-group'>
                     <label className="col-xs-3 control-label">
@@ -92,6 +83,15 @@ export default class CreateAdventureForm extends React.Component {
                         <input value={this.state.latitude} type="number"
                                className="form-control" disabled='disabled'>
                         </input>
+                    </div>
+                </div>
+                <div className='form-group'>
+                    <label className='col-xs-3 control-label'>
+                        Longitude
+                    </label>
+                    <div className="col-xs-9">
+                        <input value={this.state.longitude} type="number"
+                               disabled='disabled' className="col-xs-9 form-control"/>
                     </div>
                 </div>
                 <div onClick={this.submit.bind(this)} className="btn btn-success">Create adventure</div>
