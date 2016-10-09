@@ -5,7 +5,7 @@ from app import logger
 try:
     from config import secrets
 except:
-    logger.debug('')
+    logger.error('No vk secrets')
 
 VK_SIGNUP_URL = 'https://oauth.vk.com/access_token/'
 VK_PROFILE_URL = 'https://api.vk.com/method/users.get'

@@ -43,7 +43,7 @@ export default class Login extends React.Component {
     onVkSubmit() {
         let redirect_uri = 'http://localhost:5000/api/auth/vk';
         let client_id = '5659590';
-        let display = 'popup'
+        let display = 'popup';
         let vk_redirect = `https://oauth.vk.com/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&display=${display}&response_type=code&scope=email`;
         window.open(vk_redirect);
     }
@@ -56,8 +56,8 @@ export default class Login extends React.Component {
                            value={this.state.login}
                            required
                            onChange={this.handleInputLogin}
-                           className="xr-form__input xr-form__input_focus xr-form__input_active" ></input>
-                    <span className="xr-form__bar"></span>
+                           className="xr-form__input xr-form__input_focus xr-form__input_active" />
+                    <span className="xr-form__bar" />
                     <label className="xr-form__label">
                         Login
                     </label>
@@ -68,8 +68,8 @@ export default class Login extends React.Component {
                            required
                            value={this.state.password}
                            onChange={this.handleInputPassword}
-                           className="xr-form__input xr-form__input_focus xr-form__input_active"></input>
-                    <span className="xr-form__bar"></span>
+                           className="xr-form__input xr-form__input_focus xr-form__input_active" />
+                    <span className="xr-form__bar" />
                     <label className="xr-form__label">
                         Password
                     </label>
